@@ -1,0 +1,12 @@
+- return if @grid_name.blank?
+
+.wiki_content
+  - if @wiki
+    %h1 Wiki for #{@grid_name} grid
+    %hr
+    = @wiki.content.to_s.html_safe
+  - else
+    .missing_notice
+      There is no wiki for #{@grid_name} grid yet, you can
+      %br
+      = link_to "Create wiki for #{@grid_name}", wulin_wiki_edit_path(grid_name: @grid_name), class: 'btn success btn-large'

@@ -1,0 +1,16 @@
+// Toolbar style
+.toolbar_icon_wiki {
+  background: image-url('wiki.png') no-repeat top center
+}
+
+// Wiki content style
+.wiki_content {
+  padding: 5px;
+
+  .missing_notice {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 26px;
+    a { color: white; margin-top: 20px; text-decoration: none; font-size: 20px; }
+  }
+}
