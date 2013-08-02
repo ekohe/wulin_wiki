@@ -1,15 +1,12 @@
 module WulinWiki
   class WikisController < ApplicationController
     layout false
-    before_filter :get_wiki, only: [:edit, :show]
+    before_filter :get_wiki, only: :show
 
     def save
       @wiki = Wiki.where(grid_name: params[:wiki][:grid_name]).first_or_initialize
       @wiki.assign_attributes(params[:wiki])
-      @wiki.save!
-    end
-
-    def edit
+      @wiki.save
     end
 
     def show

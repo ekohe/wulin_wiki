@@ -4,13 +4,29 @@
 }
 
 // Wiki content style
-.wiki_content {
-  padding: 5px;
+.wiki_wrapper {
+  padding: 5px 0;
 
   .missing_notice {
     margin-top: 40px;
     text-align: center;
     font-size: 26px;
     a { color: white; margin-top: 20px; text-decoration: none; font-size: 20px; }
+  }
+
+  form {
+    .form-action {
+      text-align: center;
+      margin-top: 10px;
+      input { width: 100px; }
+    }
+  }
+}
+
+.ke-edit-iframe {
+  .ke-content {
+    height: 100%;
+    margin: 13px 3px;
+    padding: 5px 0;
   }
 }

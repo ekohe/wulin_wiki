@@ -13,7 +13,7 @@ WulinMaster.actions.Wiki = $.extend({}, WulinMaster.actions.BaseAction, {
 
     $dialog = $('<div/>')
       .attr({'id': 'wiki_dialog', 'title': 'Wiki for ' + gridName + ' grid'})
-      .css('display', 'none')
+      .css({display: 'none', 'overflow-y': 'auto'})
       .append($wiki_container)
       .appendTo('body');
 

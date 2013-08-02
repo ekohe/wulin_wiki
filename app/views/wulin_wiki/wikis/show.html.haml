@@ -1,12 +1,30 @@
 - return if @grid_name.blank?
+= javascript_include_tag 'kindeditor'
+.wiki_wrapper
+  - if current_user && current_user.respond_to?(:admin?) && current_user.admin?
+    = form_for @wiki || WulinWiki::Wiki.new, as: :wiki, url: wulin_wiki_save_path, remote: true do |wiki|
+      .form-inputs
+        = wiki.text_area :content, style: "height: 520px; width: 100%;"
+        = wiki.hidden_field :grid_name, value: @grid_name
+        = wiki.hidden_field :user_email, value: current_user.email
+      .form-action
+        = wiki.submit ' Save ', class: 'btn success', data: { disable_with: "Please wait..." }
 
-.wiki_content
-  - if @wiki
-    %h1 Wiki for #{@grid_name} grid
-    %hr
-    = @wiki.content.to_s.html_safe
+    :javascript
+      $(function() {
+        KindEditor.create('textarea#wiki_content', {
+          themesPath: '/assets/',
+          langPath: '/assets/',
+          pluginsPath : '/assets/',
+          langType: 'en',
+          items : ['source', '|', 'formatblock', 'fontname', 'fontsize', 'hr', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+            'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+            'insertunorderedlist', '|', 'link']
+        });
+      });
   - else
-    .missing_notice
-      There is no wiki for #{@grid_name} grid yet, you can
-      %br
-      = link_to "Create wiki for #{@grid_name}", wulin_wiki_edit_path(grid_name: @grid_name), class: 'btn success btn-large'
+    - if @wiki
+      = @wiki.content.to_s.html_safe
+    - else
+      .missing_notice
+        There is no wiki for #{@grid_name} grid yet
