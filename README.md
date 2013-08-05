@@ -12,13 +12,24 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install wulin_wiki
-
 ## Usage
 
-TODO: Write usage instructions here
+1. Run below rake task to copy migration files to your application:
+
+    rake wulin_wiki_engine:install:migrations
+
+2. Run db:migrate
+
+    rake db:migrate
+
+3. Activate wiki action in your grid
+
+```ruby
+#app/screens/example_grid.rb
+class ExampleGrid < WulinMaster::Grid
+  action :wiki
+end
+```
 
 ## Contributing
 
