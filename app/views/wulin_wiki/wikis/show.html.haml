@@ -12,7 +12,7 @@
 
     :javascript
       $(function() {
-        KindEditor.create('textarea#wiki_content', {"height":520,"width":"100%","allowFileManager":true,"uploadJson":"http://localhost:3000/kindeditor/upload","fileManagerJson":"http://localhost:3000/kindeditor/filemanager",langType: 'en',items : ['source', '|', 'formatblock', 'fontname', 'fontsize', 'hr', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'link', '|', 'image']});
+        KindEditor.create('textarea#wiki_content', {"height":520,"width":"100%","allowFileManager":true,"uploadJson":"/kindeditor/upload","fileManagerJson":"/kindeditor/filemanager",langType: 'en',items : ['source', '|', 'formatblock', 'fontname', 'fontsize', 'hr', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'link', '|', 'image']});
       });
   - else
     - if @wiki
