@@ -12,15 +12,7 @@
 
     :javascript
       $(function() {
-        KindEditor.create('textarea#wiki_content', {
-          themesPath: '/assets/',
-          langPath: '/assets/',
-          pluginsPath : '/assets/',
-          langType: 'en',
-          items : ['source', '|', 'formatblock', 'fontname', 'fontsize', 'hr', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-            'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-            'insertunorderedlist', '|', 'link']
-        });
+        KindEditor.create('textarea#wiki_content', {"height":520,"width":"100%","allowFileManager":true,"uploadJson":"http://localhost:3000/kindeditor/upload","fileManagerJson":"http://localhost:3000/kindeditor/filemanager",langType: 'en',items : ['source', '|', 'formatblock', 'fontname', 'fontsize', 'hr', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'link', '|', 'image']});
       });
   - else
     - if @wiki
