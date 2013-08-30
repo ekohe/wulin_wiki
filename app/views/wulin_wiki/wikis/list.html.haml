@@ -1,0 +1,60 @@
+#wiki_list_table
+  %table
+    %thead
+      %tr
+        %th ID
+        %th Grid name
+        %th Screen name
+        %th Last updated by
+        %th Created at
+        %th Updated at
+        %th
+    %tbody
+      - @wikis.each do |wiki|
+        %tr
+          %td= wiki.id
+          %td= wiki.grid_name
+          %td= wiki.screen_name
+          %td= wiki.user_email
+          %td= wiki.created_at
+          %td= wiki.updated_at
+          %th{ align: :center }= link_to ' Preview ', wulin_wiki_show_path(screen_name: wiki.screen_name, grid_name: wiki.grid_name), class: 'wiki_preview', data: { 'screen-name' => wiki.screen_name, 'grid-name' => wiki.grid_name }
+
+:javascript
+  $(function() {
+    $('.wiki_preview').on('click', function(e) {
+      e.preventDefault();
+      var action = $.extend({}, WulinMaster.actions.Wiki);
+      var screenName = $(this).data('screen-name');
+      var gridName = $(this).data('grid-name');
+      action.openWikiDialog(gridName, screenName);
+    });
+  });
+
+:css
+  #wiki_list_table {
+    height: 100%;
+    overflow: scroll;
+    width: 100%;
+  }
+  #wiki_list_table table {
+    width: 100%;
+  }
+
+  #wiki_list_table tr td, #wiki_list_table tr th {
+    font-size: 12px;
+    margin: 0;
+    height: 20px;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    padding: 3px;
+  }
+
+  #wiki_list_table tr th {
+    height: 26px;
+    background-color: #ccc;
+  }
+
+  #wiki_list_table tbody tr:last-child td,   #wiki_list_table tbody tr:last-child th {
+    border-bottom: 1px solid black;
+  }
