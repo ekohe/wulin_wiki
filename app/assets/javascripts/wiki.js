@@ -3,16 +3,28 @@ WulinMaster.actions.Wiki = $.extend({}, WulinMaster.actions.BaseAction, {
   name: 'wiki',
 
   handler: function() {
+    gridName = this.getGrid().name;
+    this.openWikiDialog(gridName);
+  },
+
+  openWikiDialog: function(gridName, screenName) {
     // Remove all existing dialogs
     $("#wiki_dialog").remove();
 
-    var $dialog, $wiki_container, gridName;
+    var $dialog, $wiki_container, wikiName = '', params = {};
 
-    gridName = this.getGrid().name;
+    if (gridName) {
+      wikiName = gridName + ' grid';
+      params['grid_name'] = gridName;
+    } else if (screenName) {
+      wikiName = screenName + ' screen';
+      params['screen_name'] = screenName;
+    }
+
     $wiki_container = $('<div/>').attr({'class': 'grid_wiki'});
 
     $dialog = $('<div/>')
-      .attr({'id': 'wiki_dialog', 'title': 'Wiki for ' + gridName + ' grid'})
+      .attr({'id': 'wiki_dialog', 'title': 'Wiki for ' + wikiName})
       .css({display: 'none', 'overflow-y': 'auto'})
       .append($wiki_container)
       .appendTo('body');
@@ -21,13 +33,8 @@ WulinMaster.actions.Wiki = $.extend({}, WulinMaster.actions.BaseAction, {
         autoOpen: true,
         width: 900,
         height: 700,
-        // buttons: {
-        //   "Ok": function() {
-        //     $(this).dialog("destroy");
-        //   }
-        // },
         create: function(event, ui) {
-          $.get('/wulin_wiki/show', { grid_name: gridName }, function(data) {
+          $.get('/wulin_wiki/show', params, function(data) {
             $wiki_container.html(data);
           });
         }
