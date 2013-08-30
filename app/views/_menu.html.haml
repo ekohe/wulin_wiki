@@ -53,7 +53,8 @@
 
     $("span.screen_wiki").off("click").on("click", function(e){
       var screen_name = $(this).siblings("a").data("wiki-screen");
-      var action = $.extend({screen_name: screen_name}, WulinMaster.actions.ScreenWiki);
+      var screen_title = $(this).siblings("a").text();
+      var action = $.extend({screen_name: screen_name, screen_title: screen_title}, WulinMaster.actions.ScreenWiki);
       action.handler();
     });
   });
