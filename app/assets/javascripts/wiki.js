@@ -19,8 +19,8 @@ WulinMaster.actions.Wiki = $.extend({}, WulinMaster.actions.BaseAction, {
 
     $dialog.dialog({
         autoOpen: true,
-        width: 800,
-        height: 600,
+        width: 900,
+        height: 700,
         // buttons: {
         //   "Ok": function() {
         //     $(this).dialog("destroy");
