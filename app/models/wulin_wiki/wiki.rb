@@ -1,8 +1,8 @@
 module WulinWiki
   class Wiki < ActiveRecord::Base
-    attr_accessible :content, :grid_name, :user_email
+    attr_accessible :content, :grid_name, :user_email, :screen_name
 
-    validates :content, :grid_name, :user_email, presence: true
-    validates :grid_name, uniqueness: false
+    validates :content, :user_email, presence: true
+    validates :grid_name, :screen_name, uniqueness: true, allow_blank: true
   end
 end

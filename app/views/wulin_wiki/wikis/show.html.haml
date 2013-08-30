@@ -1,4 +1,4 @@
-- return if @grid_name.blank?
+- return if @grid_name.blank? and @screen_name.blank?
 = javascript_include_tag 'kindeditor'
 .wiki_wrapper
   - if current_user && current_user.respond_to?(:admin?) && current_user.admin?
@@ -6,6 +6,7 @@
       .form-inputs
         = wiki.text_area :content, style: "height: 520px; width: 100%;"
         = wiki.hidden_field :grid_name, value: @grid_name
+        = wiki.hidden_field :screen_name, value: @screen_name
         = wiki.hidden_field :user_email, value: current_user.email
       .form-action
         = wiki.submit ' Save ', class: 'btn success', data: { disable_with: "Please wait..." }
@@ -19,4 +20,7 @@
       = @wiki.content.to_s.html_safe
     - else
       .missing_notice
-        There is no wiki for #{@grid_name} grid yet
+        - if @grid_name
+          There is no wiki for #{@grid_name} grid yet
+        - else
+          There is no wiki for #{@screen_name} screen yet

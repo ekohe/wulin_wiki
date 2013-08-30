@@ -1,4 +1,4 @@
-// Audit action
+// Grid wiki action
 WulinMaster.actions.Wiki = $.extend({}, WulinMaster.actions.BaseAction, {
   name: 'wiki',
 
