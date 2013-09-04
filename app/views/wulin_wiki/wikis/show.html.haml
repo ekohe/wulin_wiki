@@ -10,14 +10,34 @@
         = wiki.hidden_field :user_email, value: current_user.email
       .form-action
         = wiki.submit ' Save ', class: 'btn success', data: { disable_with: "Please wait..." }
+        = link_to ' Print ', 'javascript: void(0);', class: 'btn', id: 'print_btn'
 
     :javascript
       $(function() {
-        KindEditor.create('textarea#wiki_content', {"height":620,"width":"100%","allowFileManager":true,"uploadJson":"/kindeditor/upload","fileManagerJson":"/kindeditor/filemanager",langType: 'en',items : ['source', '|', 'formatblock', 'fontname', 'fontsize', 'hr', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'removeformat', '|', 'link', 'image', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', 'table', '|', 'print']});
+        var editor = KindEditor.create('textarea#wiki_content', {"height":620,"width":"100%","allowFileManager":true,"uploadJson":"/kindeditor/upload","fileManagerJson":"/kindeditor/filemanager",langType: 'en',items : ['source', '|', 'formatblock', 'fontname', 'fontsize', 'hr', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'removeformat', '|', 'link', 'image', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', 'table', '|', 'print']});
+
+        $('body').on('click', '#print_btn', function(){
+          editor.exec('print');
+        });
       });
   - else
     - if @wiki
-      = @wiki.content.to_s.html_safe
+      .wiki_content
+        = @wiki.content.to_s.html_safe
+      .print_action
+        = link_to ' Print ', 'javascript: void(0);', class: 'btn', id: 'print_btn'
+      :javascript
+        $(function() {
+          var editor = KindEditor.create('.wiki_content', { readonlyMode: true, items: [], afterCreate: function(){
+            $('.wiki_wrapper .ke-toolbar').remove();
+            $('.wiki_wrapper .ke-container').css('border', 'none');
+            setTimeout(function(){ $('.ke-container .ke-statusbar').remove(); }, 100);
+          }});
+          $('body').on('click', '#print_btn', function(){
+            editor.exec('print');
+          });
+        });
+
     - else
       .missing_notice
         - if @grid_name

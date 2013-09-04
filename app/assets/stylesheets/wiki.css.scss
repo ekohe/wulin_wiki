@@ -18,8 +18,18 @@
     .form-action {
       text-align: center;
       margin-top: 10px;
-      input { width: 100px; }
+      input, a#print_btn { width: 100px; }
+      a#print_btn { padding: 3px 5px; text-decoration: none; }
     }
+  }
+
+  .wiki_content {
+    height: 630px;
+  }
+  .print_action {
+    padding-top: 10px;
+    text-align: center;
+    a#print_btn { width: 100px; padding: 3px 5px; text-decoration: none; }
   }
 }
 
