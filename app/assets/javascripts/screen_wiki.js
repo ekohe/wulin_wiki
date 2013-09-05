@@ -27,6 +27,10 @@ WulinMaster.actions.ScreenWiki = $.extend({}, WulinMaster.actions.BaseAction, {
           $.get('/wulin_wiki/show', { screen_name: screenName }, function(data) {
             $wiki_container.html(data);
           });
+        },
+        close: function(event, ui) {
+          $dialog.dialog('destroy');
+          $dialog.remove();
         }
       });
   }

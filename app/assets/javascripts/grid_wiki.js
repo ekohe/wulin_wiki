@@ -1,5 +1,5 @@
 // Grid wiki action
-WulinMaster.actions.Wiki = $.extend({}, WulinMaster.actions.BaseAction, {
+WulinMaster.actions.GridWiki = $.extend({}, WulinMaster.actions.BaseAction, {
   name: 'wiki',
 
   handler: function() {
@@ -30,16 +30,20 @@ WulinMaster.actions.Wiki = $.extend({}, WulinMaster.actions.BaseAction, {
       .appendTo('body');
 
     $dialog.dialog({
-        autoOpen: true,
-        width: 900,
-        height: 700,
-        create: function(event, ui) {
-          $.get('/wulin_wiki/show', params, function(data) {
-            $wiki_container.html(data);
-          });
-        }
-      });
+      autoOpen: true,
+      width: 900,
+      height: 700,
+      create: function(event, ui) {
+        $.get('/wulin_wiki/show', params, function(data) {
+          $wiki_container.html(data);
+        });
+      },
+      close: function(event, ui) {
+        $dialog.dialog('destroy');
+        $dialog.remove();
+      }
+    });
   }
 });
 
-WulinMaster.ActionManager.register(WulinMaster.actions.Wiki);
+WulinMaster.ActionManager.register(WulinMaster.actions.GridWiki);

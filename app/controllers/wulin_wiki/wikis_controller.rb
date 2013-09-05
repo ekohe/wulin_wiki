@@ -1,11 +1,8 @@
 module WulinWiki
-  class WikisController < ApplicationController
-    layout false
+  class WikisController < WulinMaster::ScreenController
+    controller_for_screen WikiScreen
+    layout false, only: :show
     before_filter :get_wiki, only: :show
-
-    def list
-      @wikis = Wiki.all
-    end
 
     def save
       redirect_to(root_path) if respond_to?(:current_user) && current_user.admin?

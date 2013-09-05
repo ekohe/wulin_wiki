@@ -1,5 +1,4 @@
 - return if @grid_name.blank? and @screen_name.blank?
-= javascript_include_tag 'kindeditor'
 .wiki_wrapper
   - if current_user && current_user.respond_to?(:admin?) && current_user.admin?
     = form_for @wiki || WulinWiki::Wiki.new, as: :wiki, url: wulin_wiki_save_path, remote: true do |wiki|
