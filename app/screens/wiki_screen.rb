@@ -6,5 +6,8 @@ if defined? WulinMaster
 
     grid WikiGrid
 
+    def authorized?(user)
+      user.admin?
+    end
   end
 end

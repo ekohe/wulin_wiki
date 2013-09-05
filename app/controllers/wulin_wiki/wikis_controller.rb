@@ -3,6 +3,7 @@ module WulinWiki
     controller_for_screen WikiScreen
     layout false, only: :show
     before_filter :get_wiki, only: :show
+    skip_before_filter :create_permissions, only: :show
 
     def save
       redirect_to(root_path) if respond_to?(:current_user) && current_user.admin?
