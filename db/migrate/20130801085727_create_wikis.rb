@@ -3,6 +3,7 @@ class CreateWikis < ActiveRecord::Migration
     create_table :wikis do |t|
       t.string :user_email
       t.string :grid_name
+      t.string :screen_name
       t.text :content
 
       t.timestamps
