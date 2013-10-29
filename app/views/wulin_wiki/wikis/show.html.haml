@@ -1,6 +1,6 @@
 - return if @grid_name.blank? and @screen_name.blank?
 .wiki_wrapper
-  - if current_user && current_user.respond_to?(:admin?) && current_user.admin?
+  - if current_user && (current_user.respond_to?(:admin?) && current_user.admin? || current_user.has_permission_with_name?('wikis#save'))
     = form_for @wiki || WulinWiki::Wiki.new, as: :wiki, url: wulin_wiki_save_path, remote: true do |wiki|
       .form-inputs
         = wiki.text_area :content, style: "height: 620px; width: 100%;"
