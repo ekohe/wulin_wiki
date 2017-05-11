@@ -22,5 +22,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
   spec.add_dependency 'haml-rails'
-  spec.add_dependency 'rails_kindeditor'#, '~> 0.4.0'
+  # As of 2017/5/11, the latest version of rails_kindeditor isn't compatible with Rails 5.1
+  #   gem 'rails_kindeditor', git: 'https://github.com/Macrow/rails_kindeditor'
+  # needs to be added to the app bundle file to get the latest version from Github instead
+  spec.add_dependency 'rails_kindeditor'
 end
