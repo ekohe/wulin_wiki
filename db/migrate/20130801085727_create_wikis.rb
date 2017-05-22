@@ -1,4 +1,4 @@
-class CreateWikis < ActiveRecord::Migration
+class CreateWikis < ActiveRecord::Migration[5.0]
   def up
     create_table :wikis do |t|
       t.string :user_email
