@@ -16,10 +16,9 @@ if defined? WulinMaster
     column :created_at, formable: false
     column :updated_at, formable: false
 
-    action :add
+    action :create
     action :wiki_editor, title: 'Edit', icon: :edit
     action :delete
-    action :filter
-    action :excel
+    action :export
   end
 end
