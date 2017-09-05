@@ -21,28 +21,56 @@ WulinMaster.actions.GridWiki = $.extend({}, WulinMaster.actions.BaseAction, {
       params['screen_name'] = screenName;
     }
 
-    $wiki_container = $('<div/>').attr({'class': 'grid_wiki'});
+    // $wiki_container = $('<div/>').attr({'class': 'grid_wiki'});
 
-    $dialog = $('<div/>')
-      .attr({'id': 'wiki_dialog', 'title': 'Wiki for ' + wikiName})
-      .css({display: 'none', 'overflow-y': 'auto'})
-      .append($wiki_container)
-      .appendTo('body');
+    // $dialog = $('<div/>')
+    //   .attr({'id': 'wiki_dialog', 'title': 'Wiki for ' + wikiName})
+    //   .css({display: 'none', 'overflow-y': 'auto'})
+    //   .append($wiki_container)
+    //   .appendTo('body');
+    //
+    // $dialog.dialog({
+    //   autoOpen: true,
+    //   width: 900,
+    //   height: 700,
+    //   create: function(event, ui) {
+    //     $.get('/wulin_wiki/show', params, function(data) {
+    //       $wiki_container.html(data);
+    //     });
+    //   },
+    //   close: function(event, ui) {
+    //     $dialog.dialog('destroy');
+    //     $dialog.remove();
+    //   }
+    // });
 
-    $dialog.dialog({
-      autoOpen: true,
-      width: 900,
-      height: 700,
-      create: function(event, ui) {
-        $.get('/wulin_wiki/show', params, function(data) {
-          $wiki_container.html(data);
-        });
-      },
-      close: function(event, ui) {
-        $dialog.dialog('destroy');
-        $dialog.remove();
-      }
-    });
+    var $wikiModal = $('<div/>')
+      .addClass('modal modal-fixed-footer')
+      // .addClass('modal')
+      .css({overflow: 'hidden'})
+      .appendTo($('body'));
+    var $modalHeader = $('<div/>')
+      .addClass('modal-header')
+      .append($('<span/>').text('Wiki for ' + wikiName))
+      .append($('<i/>').text('close').addClass('modal-close material-icons right'))
+      .appendTo($wikiModal);
+    var $modalContent = $('<div/>')
+      .addClass('modal-content')
+      .appendTo($wikiModal);
+
+      $wikiModal.modal({
+        ready: function(modal, trigger) {
+          $.get('/wulin_wiki/show', params, function(data) {
+            $modalContent.html(data);
+          });
+        },
+        complete: function() {
+          $wikiModal.remove();
+        }
+      });
+
+      $wikiModal.modal('open');
+
   }
 });
 
