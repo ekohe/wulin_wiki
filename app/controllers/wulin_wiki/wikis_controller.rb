@@ -8,7 +8,11 @@ module WulinWiki
     def save
       redirect_to(root_path) if respond_to?(:current_user) && current_user.admin?
       params[:wiki].delete_if{|k,v| v.blank? }
-      @wiki = Wiki.where(grid_name: params[:wiki][:grid_name], screen_name: params[:wiki][:screen_name]).first_or_initialize
+      if params[:wiki][:grid_name]
+        @wiki = Wiki.where(grid_name: params[:wiki][:grid_name]).first_or_initialize
+      else
+        @wiki = Wiki.where(screen_name: params[:wiki][:screen_name]).first_or_initialize
+      end
       @wiki.assign_attributes(wiki_params)
       @wiki.save
     end
